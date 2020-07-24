@@ -15,7 +15,7 @@ public class SimpleLinkedListTest {
             simple.add(i);
         }
         Assert.assertEquals("0,1,2,3,4,5,6,7,8,9", simple.toString());
-        Assert.assertEquals(new Integer(5), simple.get(6));
+        Assert.assertEquals(new Integer(5), simple.get(5));
         Assert.assertEquals(10, simple.size());
     }
 }
