@@ -6,23 +6,45 @@ package com.test.list;
  */
 public class SimpleLinkedList<T> {
 
+    private Node<T> first;
+
+    private Node<T> last;
+
+    private int size = 0;
+
     public void add(T obj) {
+        Node<T> tmp = new Node<>(obj);
+        if (first == null) {
+            first = tmp;
+        } else {
+            last.next = tmp;
+        }
+        last = tmp;
+        size++;
     }
 
-    public T get(int i) {
-        return null;
+    public T get(int index) {
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        Node<T> tmp = first;
+        for (; index > 0; index--) {
+            tmp = tmp.next;
+        }
+
+        return tmp.value;
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
     public String toString() {
-        return null;
+        return first.toString();
     }
 
-    public static class Node<T>{
+    public static class Node<T> {
         private final T value;
         private Node<T> next;
 
@@ -32,7 +54,10 @@ public class SimpleLinkedList<T> {
 
         @Override
         public String toString() {
-            return null;
+            if (next == null) {
+                return value.toString();
+            }
+            return value + "," + next.toString();
         }
     }
 }

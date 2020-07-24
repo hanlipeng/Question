@@ -17,16 +17,29 @@ public class SimpleBlockingQueue<T> {
         this.capacity = capacity;
     }
 
-    public void push(T value) throws InterruptedException{
-
+    public void push(T value) throws InterruptedException {
+        synchronized (queue) {
+            while (queue.size() >= capacity) {
+                queue.wait();
+            }
+            queue.offer(value);
+            queue.notifyAll();
+        }
     }
 
     public T poll() throws InterruptedException {
-        return null;
+        synchronized (queue) {
+            while (queue.isEmpty()) {
+                queue.wait();
+            }
+            queue.notifyAll();
+            return queue.poll();
+        }
     }
 
-    @Override
-    public String toString() {
-        return queue.toString();
+    public int size() {
+        synchronized (queue) {
+            return queue.size();
+        }
     }
 }
