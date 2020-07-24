@@ -25,8 +25,7 @@ public class SimpleBlockingQueue<T> {
         return null;
     }
 
-    @Override
-    public String toString() {
-        return queue.toString();
+    public int size() {
+        return queue.size();
     }
 }
