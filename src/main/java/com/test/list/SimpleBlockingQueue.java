@@ -17,7 +17,7 @@ public class SimpleBlockingQueue<T> {
         this.capacity = capacity;
     }
 
-    public void push(T value) throws InterruptedException{
+    public void push(T value) throws InterruptedException {
 
     }
 
@@ -26,6 +26,8 @@ public class SimpleBlockingQueue<T> {
     }
 
     public int size() {
-        return queue.size();
+        synchronized (queue) {
+            return queue.size();
+        }
     }
 }
